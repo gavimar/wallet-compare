@@ -52,6 +52,9 @@ export default function Input(props) {
   // };
 
   
+  const fetch = (event) => {
+    props.fetchData(event.target.value)
+  }
 
   
  
@@ -71,12 +74,12 @@ export default function Input(props) {
           onChange={props.handleChange}
         >
           
-          <MenuItem value="btc-ltc" data-comp="Hello" onClick={props.fetchData}>BTC-LTC</MenuItem>
-          <MenuItem value="ltc-btc" onClick={props.fetchData}>LTC-BTC</MenuItem>
-          <MenuItem value="eth-btc" onClick={props.fetchData}>ETH-BTC</MenuItem>
-          <MenuItem value="btc-eth" onClick={props.etchData}>ETH-BTC</MenuItem>
-          <MenuItem value="eth-ltc" onClick={props.fetchData}>ETH-LTC</MenuItem>
-          <MenuItem value="ltc-ETH" onClick={props.fetchData}>LTC-ETH</MenuItem>
+          <MenuItem value="btc-ltc"  data-comp="Hello">BTC-LTC</MenuItem>
+          <MenuItem value="ltc-btc">LTC-BTC</MenuItem>
+          <MenuItem value="eth-btc">ETH-BTC</MenuItem>
+          <MenuItem value="btc-eth">ETH-BTC</MenuItem>
+          <MenuItem value="eth-ltc">ETH-LTC</MenuItem>
+          <MenuItem value="ltc-eth">LTC-ETH</MenuItem>
 
         </Select>
       </FormControl>

@@ -39,19 +39,23 @@ function Home() {
   console.log(walletsArr)
   console.log(priceArr)
 
-  const handleChange = (event) => {
+  const handleChange = async(event) => {
     setPair(event.target.value);
     // const coins= event.target.getAttribute("coinsdata");
     // // const evCoins= event.target.attributes.getNamedItem('data-tag').value;
     // // console.log(evCoins)
     // setCoins(coins)
+    const response = await axios.get(`https://compare.monedero.com/api/getPrice?pair=${event.target.value}`);
+      setData(response.data);
+    
   };
 
-  const fetchData = async () => {
-    const response = await axios.get(`https://compare.monedero.com/api/getPrice?pair=${pair}`);
-      setData(response.data);
-      console.log(response.data)
-    }
+  // const fetchData = async () => {
+    
+  //   const response = await axios.get(`https://compare.monedero.com/api/getPrice?pair=${pair}`);
+  //     setData(response.data);
+  //     console.log(response.data)
+  //   }
 
   return (
     <div>
@@ -61,7 +65,7 @@ function Home() {
     pair={pair}
     coins={coins}
     handleChange= {handleChange}
-    fetchData={fetchData}/>
+    />
     <RatesTable
     data = {data}
     walletsArr={walletsArr}

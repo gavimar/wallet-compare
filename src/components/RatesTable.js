@@ -27,16 +27,6 @@ const StyledTableRow = withStyles((theme) => ({
 }))(TableRow);
 
 
-
-// const[row, setRow] = useState([]);
-
-// const rows = props.data.map(item =>  ({
-//   createData(item.),
-// }) )
-
-
-
-
 const useStyles = makeStyles((theme) => ({
   table: {
     width:"100%",

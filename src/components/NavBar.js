@@ -4,11 +4,6 @@ import Monedero from '../images/icon.jpg'
 
 
 
-import InputAdornment from "@material-ui/core/InputAdornment";
-import SearchIcon from "@material-ui/icons/Search";
-
-
-
 const useStyles = makeStyles(theme => ({
 
    
