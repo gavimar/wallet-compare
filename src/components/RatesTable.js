@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -26,17 +26,18 @@ const StyledTableRow = withStyles((theme) => ({
   },
 }))(TableRow);
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
+function createData(wallet, coinFrom, coinTo) {
+  return { wallet, coinFrom, coinTo };
 }
 
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
+// const[row, setRow] = useState([]);
+
+// const rows = props.data.map(item =>  ({
+//   createData(item.),
+// }) )
+
+
+
 
 const useStyles = makeStyles((theme) => ({
   table: {
@@ -52,8 +53,26 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function RatesTable() {
+export default function RatesTable(props) {
   const classes = useStyles();
+  
+  
+
+  
+
+  const rows = [props.entries.map(item => createData(item[0],1,item[1]))]
+  console.log(rows)
+  const aver=[rows.map(row=> row.wallet)]
+  console.log(aver)
+
+  // const rows=[
+    
+  //   createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
+  //   createData('Eclair', 262, 16.0, 24, 6.0),
+  //   createData('Cupcake', 305, 3.7, 67, 4.3),
+  //   createData('Gingerbread', 356, 16.0, 49, 3.9),
+  // ];
+  
 
   return (
     <div className={classes.ratesTable}>
@@ -61,23 +80,20 @@ export default function RatesTable() {
       <Table className={classes.table} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>Dessert (100g serving)</StyledTableCell>
-            <StyledTableCell align="right">Calories</StyledTableCell>
-            <StyledTableCell align="right">Fat&nbsp;(g)</StyledTableCell>
-            <StyledTableCell align="right">Carbs&nbsp;(g)</StyledTableCell>
-            <StyledTableCell align="right">Protein&nbsp;(g)</StyledTableCell>
+            <StyledTableCell>Wallet</StyledTableCell>
+            <StyledTableCell align="right">coinFrom</StyledTableCell>
+            <StyledTableCell align="right">coinTo</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <StyledTableRow key={row.name}>
+            <StyledTableRow key={row.wallet}>
               <StyledTableCell component="th" scope="row">
-                {row.name}
+                {row.wallet}
               </StyledTableCell>
-              <StyledTableCell align="right">{row.calories}</StyledTableCell>
-              <StyledTableCell align="right">{row.fat}</StyledTableCell>
-              <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-              <StyledTableCell align="right">{row.protein}</StyledTableCell>
+              <StyledTableCell align="right">{row.coinFrom}</StyledTableCell>
+              <StyledTableCell align="right">{row.coinTo}</StyledTableCell>
+              
             </StyledTableRow>
           ))}
         </TableBody>

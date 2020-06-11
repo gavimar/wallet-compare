@@ -1,4 +1,4 @@
-import React,{useState, useEffect} from 'react';
+import React,{useState} from 'react';
 import axios from "axios";
 
 import { makeStyles, StylesProvider } from '@material-ui/core/styles';
@@ -30,15 +30,11 @@ formContainer:{
   justifyContent:"center",}
 }));
 
-export default function Input() {
+export default function Input(props) {
   const classes = useStyles();
-  const [age, setAge] = React.useState('');
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
-  const handleChange = (event) => {
-    setAge(event.target.value);
-    setPair(event.target.value);
-  };
+  
 
   const handleClose = () => {
     setOpen(false);
@@ -48,23 +44,16 @@ export default function Input() {
     setOpen(true);
   };
 
-  const [data, setData] = useState([]);  
-  const  [hasError, setErrors] =  useState(false);
-  const [pair, setPair] = useState("btc-ltc");
+  
 
   // const handleClick = (event) => {
     
   //   setPair(event.target.value);
   // };
 
+  
 
-  const fetchData = async () => {
-    
-  // const response = await axios.get('https://www.mountainproject.com/data/get-routes-for-lat-lon?lat=36.7569945&lon=-3.5237027&maxDistance=100&minDiff=5.6&maxDiff=5.10&key=200719178-8e0de0f7ec53dfe8e72e54c34f99e721');
-  const response = await axios.get(`https://compare.monedero.com/api/getPrice?pair=${pair}`);
-    setData(response.data);
-    console.log(response.data)
-  }
+  
  
 
 
@@ -78,16 +67,16 @@ export default function Input() {
           open={open}
           onClose={handleClose}
           onOpen={handleOpen}
-          value={pair}
-          onChange={handleChange}
+          value={props.pair}
+          onChange={props.handleChange}
         >
           
-          <MenuItem value="btc-ltc" onClick={fetchData}>BTC-LTC</MenuItem>
-          <MenuItem value="ltc-btc" onClick={fetchData}>LTC-BTC</MenuItem>
-          <MenuItem value="eth-btc" onClick={fetchData}>ETH-BTC</MenuItem>
-          <MenuItem value="btc-eth" onClick={fetchData}>ETH-BTC</MenuItem>
-          <MenuItem value="eth-ltc" onClick={fetchData}>ETH-LTC</MenuItem>
-          <MenuItem value="ltc-ETH" onClick={fetchData}>LTC-ETH</MenuItem>
+          <MenuItem value="btc-ltc" data-comp="Hello" onClick={props.fetchData}>BTC-LTC</MenuItem>
+          <MenuItem value="ltc-btc" onClick={props.fetchData}>LTC-BTC</MenuItem>
+          <MenuItem value="eth-btc" onClick={props.fetchData}>ETH-BTC</MenuItem>
+          <MenuItem value="btc-eth" onClick={props.etchData}>ETH-BTC</MenuItem>
+          <MenuItem value="eth-ltc" onClick={props.fetchData}>ETH-LTC</MenuItem>
+          <MenuItem value="ltc-ETH" onClick={props.fetchData}>LTC-ETH</MenuItem>
 
         </Select>
       </FormControl>
