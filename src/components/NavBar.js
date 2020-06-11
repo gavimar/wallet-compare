@@ -1,13 +1,6 @@
 import React, { useState } from "react";
 import {AppBar, Toolbar, Typography, makeStyles, IconButton, Button, TextField} from '@material-ui/core'
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import MenuIcon from '@material-ui/icons/Menu';
-import MenuBookIcon from '@material-ui/icons/MenuBook';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import { withStyles } from '@material-ui/core/styles';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
+import Monedero from '../images/icon.jpg'
 
 
 
@@ -15,43 +8,11 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
 
 
-const StyledMenu = withStyles({
-    paper: {
-      border: '1px solid #d3d4d5',
-    },
-  })((props) => (
-    <Menu
-      elevation={0}
-      getContentAnchorEl={null}
-      anchorOrigin={{
-        vertical: 'bottom',
-        horizontal: 'center',
-      }}
-      transformOrigin={{
-        vertical: 'top',
-        horizontal: 'center',
-      }}
-      {...props}
-    />
-  ));
-  
-  const StyledMenuItem = withStyles((theme) => ({
-    root: {
-      '&:focus': {
-        backgroundColor: theme.palette.primary.main,
-        '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
-          color: theme.palette.common.white,
-        },
-      },
-    },
-  }))(MenuItem);
-
-
 
 const useStyles = makeStyles(theme => ({
 
    
-        offset: theme.mixins.toolbar,
+    offset: theme.mixins.toolbar,
       
 
     menuButton: {
@@ -67,41 +28,25 @@ const useStyles = makeStyles(theme => ({
         flexGrow: 1,
     },
 
-   
+    appBar:{
+      backgroundColor:"white",
+      color:"black"
+    },
 
- 
-    // appBar: {
-    //     [theme.breakpoints.up('sm')]: {
-    //         width: `calc(100% - ${240}px)`,
-    //         marginLeft: 240,
-    //     },
-    // },
-    // menuDrop:{
-    //     backgroundColor:primary
-    // }
+    loginButton:{
+      backgroundColor: 	"#fee74b",
+      '&:hover': {
+        background: "#325eec",
+        color: "white"
+     }
+    }
+
 }))
 
 const Navbar = (props) => {
 
-  const [searchText, setSearchText] = useState("");
-  const handleSearchTextChange = event => {
-    setSearchText(event.target.value);
-  };
-
-  console.log(searchText)
-
-
-    const [anchorEl, setAnchorEl] = React.useState(null);
-
-    const handleClick = (event) => {
-      setAnchorEl(event.currentTarget);
-    };
   
-    const handleClose = () => {
-      setAnchorEl(null);
-    };
-
-
+    const [anchorEl, setAnchorEl] = useState(null);
 
     const classes = useStyles()
     return (
@@ -109,45 +54,8 @@ const Navbar = (props) => {
 
         <AppBar className={classes.appBar}>
             <Toolbar>
+    <img src={Monedero}></img>
                
-
-                <div>
-                <Button
-        aria-controls="customized-menu"
-        aria-haspopup="true"
-        variant="contained"
-        color="primary"
-        onClick={handleClick}
-      >
-        <MenuIcon/>
-      </Button>
-      <StyledMenu
-        id="customized-menu"
-        anchorEl={anchorEl}
-        keepMounted
-        open={Boolean(anchorEl)}
-        onClose={handleClose}
-      >
-        <StyledMenuItem>
-          <ListItemIcon>
-          <MenuBookIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText primary="Best sellers" />
-        </StyledMenuItem>
-        <StyledMenuItem>
-          <ListItemIcon>
-          <MenuBookIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText primary="New releases" />
-        </StyledMenuItem>
-        <StyledMenuItem>
-          <ListItemIcon>
-          <MenuBookIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText primary="Coming soon" />
-        </StyledMenuItem>
-      </StyledMenu>
-    </div>
                 
 
                 <Typography variant='h6' className={classes.title}>
@@ -157,7 +65,7 @@ const Navbar = (props) => {
 
                 <Button variant="text" color="inherit">
                 </Button>
-                <Button variant="text" color="inherit">
+                <Button variant="text" color="inherit" className={classes.loginButton}>
                     Login
                 </Button>
             </Toolbar>

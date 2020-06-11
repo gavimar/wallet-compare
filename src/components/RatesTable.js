@@ -10,7 +10,7 @@ import Paper from '@material-ui/core/Paper';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
-    backgroundColor: theme.palette.common.black,
+    backgroundColor: "#325eec",
     color: theme.palette.common.white,
   },
   body: {
@@ -26,9 +26,7 @@ const StyledTableRow = withStyles((theme) => ({
   },
 }))(TableRow);
 
-function createData(wallet, coinFrom, coinTo) {
-  return { wallet, coinFrom, coinTo };
-}
+
 
 // const[row, setRow] = useState([]);
 
@@ -57,10 +55,12 @@ export default function RatesTable(props) {
   const classes = useStyles();
   
   
-
+  const createData = (wallet, coinFrom, coinTo) => {
+    return { wallet, coinFrom, coinTo };
+  }
   
 
-  const rows = [props.entries.map(item => createData(item[0],1,item[1]))]
+  const rows = props.entries.map(item => createData(item[0],1,item[1]))
   console.log(rows)
   const aver=[rows.map(row=> row.wallet)]
   console.log(aver)
@@ -78,8 +78,8 @@ export default function RatesTable(props) {
     <div className={classes.ratesTable}>
     <TableContainer component={Paper} className={classes.tableContainer}>
       <Table className={classes.table} aria-label="customized table">
-        <TableHead>
-          <TableRow>
+        <TableHead >
+          <TableRow className={classes.tableHead}>
             <StyledTableCell>Wallet</StyledTableCell>
             <StyledTableCell align="right">coinFrom</StyledTableCell>
             <StyledTableCell align="right">coinTo</StyledTableCell>
