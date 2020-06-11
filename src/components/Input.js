@@ -8,6 +8,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 import { blue } from '@material-ui/core/colors';
+import {bitcoin} from '../images/bitcoin2.png'
 
 const useStyles = makeStyles((theme) => ({
 
@@ -27,7 +28,11 @@ formContainer:{
   width:"100%",
   marginTop:20,
   display:"flex",
-  justifyContent:"center",}
+  justifyContent:"center"},
+  icon:{
+    width:"10px",
+    height:"10px"
+  }
 }));
 
 export default function Input(props) {
@@ -74,8 +79,8 @@ export default function Input(props) {
           onChange={props.handleChange}
         >
           
-          <MenuItem value="btc-ltc"  data-comp="Hello">BTC-LTC</MenuItem>
-          <MenuItem value="ltc-btc">LTC-BTC</MenuItem>
+          <MenuItem value="btc-ltc"  data-comp="Hello" name="Hello">Bitcoin to Litecoin</MenuItem>
+          <MenuItem value="ltc-btc" name ="Bye">LTC-BTC</MenuItem>
           <MenuItem value="eth-btc">ETH-BTC</MenuItem>
           <MenuItem value="btc-eth">ETH-BTC</MenuItem>
           <MenuItem value="eth-ltc">ETH-LTC</MenuItem>

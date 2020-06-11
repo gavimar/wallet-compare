@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useEffect,useState} from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -7,6 +7,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Loader from './Loader'
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -62,17 +63,24 @@ export default function RatesTable(props) {
   //   createData('Cupcake', 305, 3.7, 67, 4.3),
   //   createData('Gingerbread', 356, 16.0, 49, 3.9),
   // ];
-  
+
+
+  if (!!props.coins){
+    console.log(props.coins)
+  }
+
+  console.log(props.coins)
 
   return (
     <div className={classes.ratesTable}>
+      {!props.loading ?
     <TableContainer component={Paper} className={classes.tableContainer}>
       <Table className={classes.table} aria-label="customized table">
         <TableHead >
           <TableRow className={classes.tableHead}>
             <StyledTableCell>Wallet</StyledTableCell>
-            <StyledTableCell align="right">coinFrom</StyledTableCell>
-            <StyledTableCell align="right">coinTo</StyledTableCell>
+      <StyledTableCell align="right">{props.coins[0]}</StyledTableCell>
+      <StyledTableCell align="right">{props.coins[1]}</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -89,6 +97,8 @@ export default function RatesTable(props) {
         </TableBody>
       </Table>
     </TableContainer>
+    : <Loader></Loader>
+  }
     </div>
   );
 }

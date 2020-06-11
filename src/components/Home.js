@@ -10,17 +10,24 @@ import axios from "axios";
 
 function Home() {
 
-  useEffect(async() => {
+  useEffect(() => {
+
+    const fetchData = async() =>{
     const response = await axios.get("https://compare.monedero.com/api/getPrice?pair=btc-ltc");
     setData(response.data);
     // console.log(response.data)
+    }
+    fetchData();
+    parseCoinNames(pair);
+    console.log(data)
 }, [])
 
   const [data, setData] = useState([]);  
   const  [hasError, setErrors] =  useState(false);
   const [pair, setPair] = useState("btc-ltc");
-  const [coins, setCoins] = useState("Bitcoin")
-  console.log(coins)
+  
+  const [loading, setLoading] = useState(false);
+  
 
   const entries = Object.entries(data);
 
@@ -40,15 +47,29 @@ function Home() {
   console.log(priceArr)
 
   const handleChange = async(event) => {
+    setLoading(true)
     setPair(event.target.value);
+    parseCoinNames(event.target.value);
+    console.log("hello");
     // const coins= event.target.getAttribute("coinsdata");
     // // const evCoins= event.target.attributes.getNamedItem('data-tag').value;
     // // console.log(evCoins)
-    // setCoins(coins)
+    // setCoins(event.target.name)
+    // console.log(event.target.name)
     const response = await axios.get(`https://compare.monedero.com/api/getPrice?pair=${event.target.value}`);
       setData(response.data);
+    setLoading(false)
     
   };
+
+  const [coins, setCoins] = useState(["btc","ltc"])
+  const parseCoinNames = (pair) =>{
+    
+      pair = pair.toUpperCase();
+      setCoins(pair.split("-"))
+      
+      
+  }
 
   // const fetchData = async () => {
     
@@ -63,14 +84,17 @@ function Home() {
     <Input
     data={data}
     pair={pair}
-    coins={coins}
+    
     handleChange= {handleChange}
     />
     <RatesTable
     data = {data}
     walletsArr={walletsArr}
     priceArr= {priceArr}
-    entries={entries}/>
+    entries={entries}
+    loading={loading}
+    pair={pair}
+    coins={coins}/>
     
     
     </div>
