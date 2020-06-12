@@ -17,6 +17,7 @@ function Home() {
     setData(response.data);
     // console.log(response.data)
     }
+    setLoading(false)
     fetchData();
     parseCoinNames(pair);
     console.log(data)
@@ -26,7 +27,7 @@ function Home() {
   const  [hasError, setErrors] =  useState(false);
   const [pair, setPair] = useState("btc-ltc");
   
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   
 
   const entries = Object.entries(data);
