@@ -36,7 +36,7 @@ formContainer:{
   textFieldSearch:{
     width:"20%",
     backgroundColor:"white",
-    borderRadius: 10
+   
   },
   submitButton:{
     width:50,
@@ -47,7 +47,26 @@ formContainer:{
     display:"flex",
     flexDirection:"row",
     alignItems:"flex-end"
-  }
+  },
+//   select: {
+//     borderWidth:"2px",
+//     '&:before': {
+//         borderColor: "lightgrey",
+//     },
+//     '&:after': {
+//         borderColor: theme.palette.primary.main,
+//     }
+// },
+
+select : { 
+  borderWidth: 1, 
+  borderStyle: 'solid',
+
+  borderColor: "lightgrey",
+  borderRadius: "10px",
+  padding:"5px",
+  
+        } 
 }));
 
 export default function Input(props) {
@@ -81,8 +100,9 @@ export default function Input(props) {
   return (
     <div className={classes.formContainer}>
        <FormControl className={classes.formControl}>
-        <InputLabel id="demo-controlled-open-select-label" className={classes.inputLabel}>Choose coin pair</InputLabel>
-        <Select
+        <InputLabel id="demo-controlled-open-select-label" className={classes.inputLabel}>Select pair</InputLabel>
+        
+        <Select className={classes.select} disableUnderline
           labelId="demo-controlled-open-select-label"
           id="demo-controlled-open-select"
           open={open}
@@ -90,6 +110,7 @@ export default function Input(props) {
           onOpen={handleOpen}
           value={props.pair}
           onChange={props.handleChange}
+          InputProps={{ disableUnderline: true }}
         >
           
           <MenuItem value="btc-ltc"  data-comp="Hello" name="Hello">Bitcoin to Litecoin</MenuItem>
@@ -100,6 +121,7 @@ export default function Input(props) {
           <MenuItem value="ltc-eth">Litecoin to Ethereum</MenuItem>
 
         </Select>
+        
 
         <div className={classes.formSubmit}>
         
@@ -113,10 +135,13 @@ export default function Input(props) {
             onChange={props.handleSearchTextChange}
             margin="normal"
             className={classes.textFieldSearch}
+            InputProps={{ disableUnderline: true }}
+            // style={{ border: '1px solid' }}
+            variant="outlined"
             />
 
         <Button variant="contained" color="primary" className={classes.submitButton} onClick={props.handleSubmit}>
-          Submit
+          Go
         </Button>
         </div>
 
