@@ -1,12 +1,12 @@
 import React,{useState} from 'react';
 import axios from "axios";
+import {TextField, Button} from '@material-ui/core';
 
 import { makeStyles, StylesProvider } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import Button from '@material-ui/core/Button';
 import { blue } from '@material-ui/core/colors';
 import {bitcoin} from '../images/bitcoin2.png'
 
@@ -32,6 +32,21 @@ formContainer:{
   icon:{
     width:"10px",
     height:"10px"
+  },
+  textFieldSearch:{
+    width:"20%",
+    backgroundColor:"white",
+    borderRadius: 10
+  },
+  submitButton:{
+    width:50,
+    height:30,
+    margin:10
+  },
+  formSubmit:{
+    display:"flex",
+    flexDirection:"row",
+    alignItems:"flex-end"
   }
 }));
 
@@ -56,10 +71,8 @@ export default function Input(props) {
   //   setPair(event.target.value);
   // };
 
+
   
-  const fetch = (event) => {
-    props.fetchData(event.target.value)
-  }
 
   
  
@@ -80,13 +93,33 @@ export default function Input(props) {
         >
           
           <MenuItem value="btc-ltc"  data-comp="Hello" name="Hello">Bitcoin to Litecoin</MenuItem>
-          <MenuItem value="ltc-btc" name ="Bye">LTC-BTC</MenuItem>
-          <MenuItem value="eth-btc">ETH-BTC</MenuItem>
-          <MenuItem value="btc-eth">ETH-BTC</MenuItem>
-          <MenuItem value="eth-ltc">ETH-LTC</MenuItem>
-          <MenuItem value="ltc-eth">LTC-ETH</MenuItem>
+          <MenuItem value="ltc-btc" name ="Bye">Litecoin to Bitcoin</MenuItem>
+          <MenuItem value="eth-btc">Ethereum to Bitcoin</MenuItem>
+          <MenuItem value="btc-eth">Bitcoin to Ethereum</MenuItem>
+          <MenuItem value="eth-ltc">Ethereum to Litecoin</MenuItem>
+          <MenuItem value="ltc-eth">Litecoin to Ethereum</MenuItem>
 
         </Select>
+
+        <div className={classes.formSubmit}>
+        
+        <TextField
+            labelId="textfield-label"
+            id="textfield"
+            label="Amount"
+            defaultValue="1"
+            placeholder = "1"
+            value={props.searchText}
+            onChange={props.handleSearchTextChange}
+            margin="normal"
+            className={classes.textFieldSearch}
+            />
+
+        <Button variant="contained" color="primary" className={classes.submitButton} onClick={props.handleSubmit}>
+          Submit
+        </Button>
+        </div>
+
       </FormControl>
     </div>
   );

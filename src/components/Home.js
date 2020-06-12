@@ -38,26 +38,17 @@ function Home() {
   console.log(data)
   console.log(entries)
 
-  for (let i = 0; i<entries.length; i++){
-    walletsArr= [...walletsArr, entries[i][0]]
-    priceArr = [...priceArr, entries[i][1]]
-  }
 
-
-  console.log(walletsArr)
-  console.log(priceArr)
-
-  const handleChange = async(event) => {
-    setLoading(true)
+  const handleChange = (event) => {
     setPair(event.target.value);
     parseCoinNames(event.target.value);
     console.log("hello");
-    // const coins= event.target.getAttribute("coinsdata");
-    // // const evCoins= event.target.attributes.getNamedItem('data-tag').value;
-    // // console.log(evCoins)
-    // setCoins(event.target.name)
-    // console.log(event.target.name)
-    const response = await axios.get(`https://compare.monedero.com/api/getPrice?pair=${event.target.value}`);
+  };
+
+  const handleSubmit = async() => {
+    setLoading(true)
+    setAmountTable(searchText)
+    const response = await axios.get(`https://compare.monedero.com/api/getPrice?pair=${pair}&amount=${searchText}`);
       setData(response.data);
     setLoading(false)
     
@@ -72,12 +63,13 @@ function Home() {
       
   }
 
-  // const fetchData = async () => {
-    
-  //   const response = await axios.get(`https://compare.monedero.com/api/getPrice?pair=${pair}`);
-  //     setData(response.data);
-  //     console.log(response.data)
-  //   }
+  const [searchText, setSearchText] = useState("1");
+  const handleSearchTextChange = event => {
+    setSearchText(event.target.value);
+  };
+
+  const [amountTable, setAmountTable] = useState("1")
+  
 
   return (
     <div>
@@ -85,8 +77,10 @@ function Home() {
     <Input
     data={data}
     pair={pair}
-    
     handleChange= {handleChange}
+    searchText={searchText}
+    handleSearchTextChange={handleSearchTextChange}
+    handleSubmit={handleSubmit}
     />
     <RatesTable
     data = {data}
@@ -95,7 +89,9 @@ function Home() {
     entries={entries}
     loading={loading}
     pair={pair}
-    coins={coins}/>
+    coins={coins}
+    amountTable={amountTable}
+    />
     
     
     </div>

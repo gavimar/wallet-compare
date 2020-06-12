@@ -11,7 +11,7 @@ import Loader from './Loader'
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
-    backgroundColor: "#325eec",
+    backgroundColor: theme.palette.primary.main,
     color: theme.palette.common.white,
   },
   body: {
@@ -51,18 +51,8 @@ export default function RatesTable(props) {
   }
   
 
-  const rows = props.entries.map(item => createData(item[0],1,item[1]))
-  console.log(rows)
-  const aver=[rows.map(row=> row.wallet)]
-  console.log(aver)
+  const rows = props.entries.map(item => createData(item[0],props.amountTable,item[1]))
 
-  // const rows=[
-    
-  //   createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  //   createData('Eclair', 262, 16.0, 24, 6.0),
-  //   createData('Cupcake', 305, 3.7, 67, 4.3),
-  //   createData('Gingerbread', 356, 16.0, 49, 3.9),
-  // ];
 
 
   if (!!props.coins){
