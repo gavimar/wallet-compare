@@ -7,17 +7,10 @@ import Home from './components/Home'
 
 function App() {
 
-  
-
-  return (
-
-    
+  return (    
     <ThemeProvider theme={theme}>
-      
       <Home />
-
     </ThemeProvider>
-    
   );
 }
 
